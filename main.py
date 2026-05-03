@@ -5,23 +5,24 @@ ARQUIVO = "data.json"
 
 def carregar_dados():
     try:
-        with open(ARQUIVO, "r") as f:
-            return json.load(f)
-except FileNotFoundError:
-    return []
-except json.JSONDecodeError:
-    return []
+        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
+            return json.load(arquivo)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        return []
 
 
 def salvar_dados(dados):
-    with open(ARQUIVO, "w") as f:
-        json.dump(dados, f, indent=4)
+    with open(ARQUIVO, "w", encoding="utf-8") as arquivo:
+        json.dump(dados, arquivo, indent=4, ensure_ascii=False)
 
 
 def adicionar_aluno(dados):
     nome = input("Nome do aluno: ")
     dados.append({"nome": nome, "notas": []})
     salvar_dados(dados)
+    print("Aluno adicionado!")
 
 
 def adicionar_nota(dados):
