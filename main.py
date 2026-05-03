@@ -7,8 +7,10 @@ def carregar_dados():
     try:
         with open(ARQUIVO, "r") as f:
             return json.load(f)
-    except:
-        return []
+except FileNotFoundError:
+    return []
+except json.JSONDecodeError:
+    return []
 
 
 def salvar_dados(dados):
